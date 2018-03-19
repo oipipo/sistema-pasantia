@@ -15,56 +15,56 @@
 					Registro
 				</h1>
 			</div>
-			<form action="" method="post">
-				<div class="form-group">
+
+			<div class="form-group">
 					<div class="col-md-12">
 						<div>
 							<h5 for="user" class="text-center">Uneg user</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="user" name="user" value="" class="form-control">
+							<input type="user" name="user" value="" class="form-control" id="username">
 						</div>
 						<div>
 							<h5 for="password" class="text-center">Password</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="text" name="password" value="" class="form-control">
+							<input type="text" name="password" value="" class="form-control" id="password">
 						</div>
 						<div>
 							<h5 for="nombre" class="text-center">Nombre</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="text" name="nombre" value="" class="form-control">
+							<input type="text" name="nombre" value="" class="form-control" id="nombre">
 						</div>
 						<div>
 							<h5 for="cedula" class="text-center">Cédula</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="text" name="cedula" value="" class="form-control">
+							<input type="text" name="cedula" value="" class="form-control" id="cedula">
 						</div>
 						<div>
 							<h5 for="email" class="text-center">Email</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="email" name="email" value="" class="form-control">
+							<input type="email" name="email" value="" class="form-control" id="email">
 						</div>
 						<div>
 							<h5 for="celular" class="text-center">celular</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="text" name="celular" value="" class="form-control">
+							<input type="text" name="celular" value="" class="form-control" id="celular">
 						</div>
 						<div>
 							<h5 for="telefono" class="text-center">telefono</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
-							<input type="text" name="telefono" value="" class="form-control">
+							<input type="text" name="telefono" value="" class="form-control" id="telefono">
 						</div>
 						<div>
 							<h5 for="Tipo de pasantía" class="text-center">Tipo de pasantía</h5>
 						</div>
 						<div class="col-md-5 mb-2 mx-auto">
-							<select>
+							<select id="tipo">
 								  <option value="profesional">Profesional</option>
 								  <option value="tesista">Tesista</option>
 							</select>
@@ -73,7 +73,7 @@
 							<h5 for="proyecto de carrera" class="text-center">Proyecto de carrera</h5>
 						</div>
 						<div class="col-md-10 mb-2 mx-auto">
-							<select>
+							<select id="carrera">
 								  <option value="informatica">Ingeniería informática</option>
 								  <option value="industrial">Ingeniería industrial</option>
 								  <option value="administracion">Administracion de empresas</option>
@@ -85,19 +85,55 @@
 								  <option value="matemática">Educación mención matemática</option>
 							</select>
 						</div>
-						<div class="col-md-4 mb-2 mx-auto">
-							<input type="submit" href="/sistema" class="btn btn-dark btn-lg">
-						</div>
+
 						<div>
 							<h5 for="direccion" class="text-center">Direccion Exacta</h5>
 						</div>
+
 						<div class="col-md-8 mx-auto">
 							<input type="text" name="direccion" value="" class="form-control">
 						</div>
+						<div class="col-md-4 mb-2 mx-auto">
+							<button onClick="registrar()" class="btn btn-dark btn-lg">Registrar</button>
+						</div>
 					</div>
 				</div>
-			</form>
+
 		</div>
 	</div>
+	<script type="text/javascript">
+	function registrar() {
+  const username = $("#username").val();
+  const password = $("#password").val();
+  const data = {};
+  data.user = username;
+  data.password = password;
+  $.ajax({
+    url: "api/user",
+    data: data,
+    method: "POST",
+    type: "POST",
+    success: function(data) {
+      alert("IT WORKS");
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      //TODO ERROR NOTIFY
+    }
+  });
+
+  /* Para sacar los datos
+  $.ajax({
+    url: "api/user/me",
+    data: data,
+    method: "GET",
+    success: function(data) {
+      // aqui tienes la data del usuario
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      //TODO ERROR NOTIFY
+    }
+  });*/
+}
+</script>
 </body>
 </html>
