@@ -105,6 +105,7 @@
 	function registrar() {
   const username = $("#username").val();
   const password = $("#password").val();
+<<<<<<< HEAD
   const nombre = $("#nombre").val();
   const cedula = $("#cedula").val();
   const email = $("#email ").val();
@@ -124,6 +125,11 @@
   data.direccion = direccion;
 
 
+=======
+  const data = {};
+  data.user = username;
+  data.password = password;
+>>>>>>> e7e20ba10f9adff13196d60feb6469bb871baca6
   $.ajax({
     url: "api/user",
     data: data,
