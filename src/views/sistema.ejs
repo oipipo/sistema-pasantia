@@ -6,8 +6,69 @@
 	<% include partials/head %>
 </head>
 <body class="sistema">
-	<div class="container">
-	<h1>hola</h1>
+	<script src="js/main.js" chartset="utf-8"></script>
+	<script src="js/generar.js" chartset="utf-8"></script>
+	<script src="js/carta-presentacion.js" chartset="utf-8"></script>
+	<script src="js/reglamento.js" chartset="utf-8"></script>
+	<script src="js/carta-postulacion.js" chartset="utf-8"></script>
+	<!--
+	<script src="js/plan-trabajo.js" chartset="utf-8"></script>
+	<script src="js/constancia-inscripcion.js" chartset="utf-8"></script>
+    -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+
+	<div class="container-fluid" style="background:white;">
+		<div class="row " style="border-bottom-style:solid; border-color:black">
+			<div class="col-md-3 mb-2">
+				<img class="col-md-4 mt-2" src="/images/uneg.png" alt="Generic placeholder image" style="padding-left:1px">
+			</div>
+			<div class="col-md-8 mt-4 ">
+				<h1>Bienvenido al Sistema de Pasantías</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid h-100"  style="background:gray;">
+		<div class="row h-100">
+			<div class="col-md-3 " style="border-right-style: solid; border-color:black">
+				<div type="button" id="generar-btn" class="btn btn-basic btn-lg btn-block mt-4 mb-2">
+						Generar pasantía
+				</div>
+				<div type="button" id="presentacion-btn" class="btn btn-primary btn-lg btn-block mt-4 mb-2" onclick="javascript:generar_lista_presentacion()">
+						Carta de presentación
+				</div>
+				<div type="button" id="postulacion-btn" class="btn btn-secondary btn-lg btn-block mt-3 mb-2" onclick="javascript:generar_lista_postulacion()">
+						Carta de postulacion
+				</div>
+				<div type="button" class="btn btn-info btn-lg btn-block mt-3 mb-2" onclick="javascript:Carta_Presentacion()">
+						Plan de trabajo
+				</div>
+				<div type="button" class="btn btn-success btn-lg btn-block mt-3 mb-2" onclick="javascript:Carta_Presentacion()">
+						Constancia de inscripción de Pasantía
+				</div>
+				<div type="button" id="reglamento-btn" class="btn btn-link btn-lg btn-block mt-3 mb-2">
+						Reglamento de pasantías 						
+				</div>
+				<div type="button" class="btn btn-danger btn-lg btn-block mt-3 mb-3" onclick="/logout">
+						Salir
+				</div>
+			</div>
+			<div class="col">
+				<div id="inicio">
+					<h1 align="justify">Bienvenido al sistema de pasantías, este sistema sirve para generar tus cartas de postulacion, presentación, constancia de inscripcion de pasantía, y subir tu plan de trabajo, así como tambien, revisar e imprimir cada una de estas adicionalmente se le da la opcion para descargar </h1>
+				</div>
+				<div class="col" id="generar" style="display:none">
+				</div>
+				<div class="col" id="carta-presentacion" style="display:none">
+						<h2>Cartas de presentación disponibles</h2>
+						  <ul class="list-group" id="preList">
+				</div>
+				<div class="col" id="carta-postulacion" style="display:none">
+					<h2>Cartas de postulación disponibles</h2>
+					<ul class="list-group" id="posList">
+				</div>
+				<embed src="/documents/reglamento.pdf" type="application/pdf" id="reglamento" style="display:none;" width="101%" height="85%"></embed>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

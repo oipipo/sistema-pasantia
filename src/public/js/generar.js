@@ -1,0 +1,12 @@
+$(document).ready(function()
+{
+	$("#generar-btn").click(function(){
+    	$("#reglamento").hide();
+    	$("#inicio").hide();
+    	$("#carta-presentacion").hide();
+    	$("#carta-postulacion").hide();
+    	$("#constancia-inscripcion").hide();
+    	$("#plan-trabajo").hide();
+    	$("#generar").show();
+	});
+});
