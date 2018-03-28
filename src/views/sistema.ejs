@@ -48,15 +48,52 @@
 				<div type="button" id="reglamento-btn" class="btn btn-link btn-lg btn-block mt-3 mb-2">
 						Reglamento de pasantías 						
 				</div>
-				<div type="button" class="btn btn-danger btn-lg btn-block mt-3 mb-3" onclick="/logout">
-						Salir
-				</div>
+				<a href="/logout">
+					<div type="button" class="btn btn-danger btn-lg btn-block mt-3 mb-3" href="/logout">
+							Salir
+					</div>
+				</a>
 			</div>
 			<div class="col">
 				<div id="inicio">
 					<h1 align="justify">Bienvenido al sistema de pasantías, este sistema sirve para generar tus cartas de postulacion, presentación, constancia de inscripcion de pasantía, y subir tu plan de trabajo, así como tambien, revisar e imprimir cada una de estas adicionalmente se le da la opcion para descargar </h1>
 				</div>
 				<div class="col" id="generar" style="display:none">
+					<div class="col-md-6 mt-2 ml-4">
+						<div>
+							<h5 for="Tipo de pasantía" class="text-center">Tipo de pasantía</h5>
+						</div>
+						<div class="col-md-3 mb-2 mx-auto">
+							<select id="tipo">
+								  <option value="profesional">Profesional</option>
+								  <option value="tesista">Tesista</option>
+							</select>
+						</div>
+						<div>
+							<h5 for="proyecto de carrera" class="text-center">Proyecto de carrera</h5>
+						</div>
+						<div class="col-md-8 mb-2 mx-auto">
+							<select id="carrera">
+								  <option value="informatica">Ingeniería informática</option>
+								  <option value="industrial">Ingeniería industrial</option>
+								  <option value="administracion">Administracion de empresas</option>
+								  <option value="contaduria">Contaduría pública</option>
+								  <option value="banca">Banca y finanza</option>
+								  <option value="educacion">Educación integral</option>
+								  <option value="deporte">Educación mención educación física</option>
+								  <option value="lengua">Educación mención lengua y literatura</option>
+								  <option value="matemática">Educación mención matemática</option>
+							</select>
+						</div>
+
+						<div>
+							<h5 for="direccion" class="text-center">Direccion Exacta</h5>
+						</div>
+
+						<div class="col-md-8 mx-auto">
+							<input type="text" name="direccion" value="" class="form-control">
+						</div>
+					</div>
 				</div>
 				<div class="col" id="carta-presentacion" style="display:none">
 						<h2>Cartas de presentación disponibles</h2>

@@ -21,10 +21,6 @@ module.exports = (app, passport) => {
       menssage: req.flash("sistemaMessage")
     });
   });
-<<<<<<< HEAD
-  
-=======
->>>>>>> e7e20ba10f9adff13196d60feb6469bb871baca6
   app.get("/registro", (req, res) => {
     res.render("registro", {
       menssage: req.flash("registroMessage")
