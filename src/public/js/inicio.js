@@ -1,11 +1,11 @@
 $(document).ready(function()
 {
-	$("#reglamento-btn").click(function(){
-    	$("#reglamento").show();
-    	$("#inicio").hide();
+	$("#inicio-btn").click(function(){
+    	$("#reglamento").hide();
+    	$("#inicio").show();
     	$("#carta-presentacion").hide();
     	$("#carta-postulacion").hide();
     	$("#plan-trabajo").hide();
-		$("#generar").hide();
+    	$("#generar").hide();
 	});
 });

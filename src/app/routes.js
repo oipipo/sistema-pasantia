@@ -1,4 +1,5 @@
 const UserController = require("./controllers/user");
+const PasantiaController = require("./controllers/pasantia");
 
 module.exports = (app, passport) => {
   app.get("/", (req, res) => {
@@ -38,6 +39,12 @@ module.exports = (app, passport) => {
   app.get("/api/user/me", UserController.me);
   app.put("/api/user", UserController.update);
   app.delete("/api/user", UserController.destroy);
+  //crud de pasantias
+  app.post("/api/pasantia", PasantiaController.create);
+  app.get("/api/pasantia/:id", PasantiaController.profile);
+  app.get("/api/pasantia/me", PasantiaController.me);
+  app.put("/api/pasantia", PasantiaController.update);
+  app.delete("/api/pasantia", PasantiaController.destroy);
 };
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

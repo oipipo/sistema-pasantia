@@ -11,25 +11,42 @@
 	<script src="js/carta-presentacion.js" chartset="utf-8"></script>
 	<script src="js/reglamento.js" chartset="utf-8"></script>
 	<script src="js/carta-postulacion.js" chartset="utf-8"></script>
+	<script src="js/inicio.js" chartset="utf-8"></script>
 	<!--
 	<script src="js/plan-trabajo.js" chartset="utf-8"></script>
 	<script src="js/constancia-inscripcion.js" chartset="utf-8"></script>
     -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
 
-	<div class="container-fluid" style="background:white;">
+	<div class="container-fluid" style="background:#0D50AF;">
 		<div class="row " style="border-bottom-style:solid; border-color:black">
-			<div class="col-md-3 mb-2">
-				<img class="col-md-4 mt-2" src="/images/uneg.png" alt="Generic placeholder image" style="padding-left:1px">
+			<div class="col-md-3 mb-2 mx-auto">
+				<div  id="inicio-btn" class="col-md-4 mt-2  mx-auto">
+					<a href="">
+						<img class="img-fluid" alt="Responsive image" src="/images/uneg.png">
+					</a>
+				</div>
 			</div>
-			<div class="col-md-8 mt-4 ">
-				<h1>Bienvenido al Sistema de Pasantías</h1>
+			<div class="col-md-9 mt-4" style="color:white">
+					<h1 class="text-center" >Bienvenido al Sistema de Pasantías</h1>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid h-100"  style="background:gray;">
+	<div class="container-fluid h-100"  style="background:white;">
 		<div class="row h-100">
 			<div class="col-md-3 " style="border-right-style: solid; border-color:black">
+				<script>
+				  $.ajax({
+				    url: "api/user/me",
+				    method: "GET",
+				    success: function(data) {
+				      console.log(data.user);
+				    },
+				    error: function(XMLHttpRequest, textStatus, errorThrown) {
+				      //TODO ERROR NOTIFY
+				    }
+				  });
+			  </script>
 				<div type="button" id="generar-btn" class="btn btn-basic btn-lg btn-block mt-4 mb-2">
 						Generar pasantía
 				</div>
@@ -39,10 +56,10 @@
 				<div type="button" id="postulacion-btn" class="btn btn-secondary btn-lg btn-block mt-3 mb-2" onclick="javascript:generar_lista_postulacion()">
 						Carta de postulacion
 				</div>
-				<div type="button" class="btn btn-info btn-lg btn-block mt-3 mb-2" onclick="javascript:Carta_Presentacion()">
+				<div type="button" class="btn btn-info btn-lg btn-block mt-3 mb-2" onclick="javascript:()">
 						Plan de trabajo
 				</div>
-				<div type="button" class="btn btn-success btn-lg btn-block mt-3 mb-2" onclick="javascript:Carta_Presentacion()">
+				<div type="button" class="btn btn-success btn-lg btn-block mt-3 mb-2" onclick="javascript:()">
 						Constancia de inscripción de Pasantía
 				</div>
 				<div type="button" id="reglamento-btn" class="btn btn-link btn-lg btn-block mt-3 mb-2">
@@ -54,45 +71,77 @@
 					</div>
 				</a>
 			</div>
-			<div class="col">
+			<div class="col-md-9">
 				<div id="inicio">
 					<h1 align="justify">Bienvenido al sistema de pasantías, este sistema sirve para generar tus cartas de postulacion, presentación, constancia de inscripcion de pasantía, y subir tu plan de trabajo, así como tambien, revisar e imprimir cada una de estas adicionalmente se le da la opcion para descargar </h1>
 				</div>
-				<div class="col" id="generar" style="display:none">
-					<div class="col-md-6 mt-2 ml-4">
+				<div class="row" id="generar" style="display:none;">
+					<div class="col-md-6 mb-2 mt-2 ml-4" style="background:Gainsboro;border-color:black;border-style:solid">
+						<div>
+							<h3 for="Ingrese datos" class="text-center">Ingrese datos de su pasantía</h3>
+						</div>
 						<div>
 							<h5 for="Tipo de pasantía" class="text-center">Tipo de pasantía</h5>
 						</div>
-						<div class="col-md-3 mb-2 mx-auto">
+						<div class="col-md-2 mb-2 mx-auto">
 							<select id="tipo">
 								  <option value="profesional">Profesional</option>
 								  <option value="tesista">Tesista</option>
 							</select>
 						</div>
 						<div>
-							<h5 for="proyecto de carrera" class="text-center">Proyecto de carrera</h5>
+							<h5 for="empresa" class="text-center">Empresa/Institución</h5>
 						</div>
-						<div class="col-md-8 mb-2 mx-auto">
-							<select id="carrera">
-								  <option value="informatica">Ingeniería informática</option>
-								  <option value="industrial">Ingeniería industrial</option>
-								  <option value="administracion">Administracion de empresas</option>
-								  <option value="contaduria">Contaduría pública</option>
-								  <option value="banca">Banca y finanza</option>
-								  <option value="educacion">Educación integral</option>
-								  <option value="deporte">Educación mención educación física</option>
-								  <option value="lengua">Educación mención lengua y literatura</option>
-								  <option value="matemática">Educación mención matemática</option>
-							</select>
+						<div class="col-md-6 mb-2 mx-auto">
+							<input type="text" id="empresa" required value="" class="form-control">
 						</div>
-
 						<div>
-							<h5 for="direccion" class="text-center">Direccion Exacta</h5>
+							<h5 for="area" class="text-center">Area a ejecutar</h5>
 						</div>
+						<div class="col-md-6 mb-2 mx-auto">
+							<input type="text" id="area" value="" class="form-control">
+						</div>
+						<div>
+							<h5 for="titulo" class="text-center">Titulo de pasantia</h5>
+						</div>
+						<div class="col-md-6 mb-2 mx-auto">
+							<input type="text" id="titulo" value="" class="form-control">
+						</div>
+						<div>
+							<h5 for="tutor academico" class="text-center">Tutor academico</h5>
+						</div>
+						<div class="col-md-6 mb-2 mx-auto">
+							<input type="text" id="academico" value="" class="form-control">
+						</div>
+						<div>
+							<h5 for="Fecha de inicio" class="text-center">Fecha de inicio</h5>
+						</div>
+						<div class="col-md-4 mb-2 mx-auto">
+							<input type="date" required id="init" value="">
+						</div>
+						<div>
+							<h5 for="Fecha de culminación" class="text-center">Fecha de culminación</h5>
+						</div>
+						<div class="col-md-4 mb-2 mx-auto">
+							<input type="date" required id="fin" value="">
+						</div>
+						<div>
+							<h5 for="Duracion" class="text-center">Duración</h5>
+						</div>
+						<div class="col-md-3 mb-2 mx-auto">
+							<input type="number" id="duracion" value="16" min="16" max="52">
+						</div>
+						<div class="col-md-3 mt-2 mb-2 mx-auto">
+							<button onClick="generar()" id="registrar-btn" class="btn btn-dark btn-lg">Registrar</button>
+						</div>
+					</div>
+<!--
+					<div class="col" id="presentacion">
 
-						<div class="col-md-8 mx-auto">
-							<input type="text" name="direccion" value="" class="form-control">
-						</div>
+					</div>
+				-->
+					<div class="col" id="postulacion">
+
 					</div>
 				</div>
 				<div class="col" id="carta-presentacion" style="display:none">
@@ -103,9 +152,10 @@
 					<h2>Cartas de postulación disponibles</h2>
 					<ul class="list-group" id="posList">
 				</div>
-				<embed src="/documents/reglamento.pdf" type="application/pdf" id="reglamento" style="display:none;" width="101%" height="85%"></embed>
+				<embed src="/documents/reglamento.pdf" type="application/pdf" width="101%" height="85%" id="reglamento" style="display:none;"  ></embed>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

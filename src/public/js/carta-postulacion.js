@@ -5,7 +5,6 @@ $(document).ready(function()
     	$("#inicio").hide();
     	$("#carta-presentacion").hide();
     	$("#carta-postulacion").show();
-    	$("#constancia-inscripcion").hide();
     	$("#plan-trabajo").hide();
     	$("#generar").hide();
 	});

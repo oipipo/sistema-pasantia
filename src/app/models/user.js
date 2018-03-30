@@ -5,11 +5,12 @@ const userSchema = new mongoose.Schema({
 	user: String,
 	password: String,
 	nombre: String,
+	apellido: String,
 	cedula: String,
 	email: String,
+	carrera: String,
 	celular: String,
 	telefono: String,
-	tipo: String,
 	direccion: String
 });
 userSchema.methods.generateHash = function (password)

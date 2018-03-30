@@ -34,6 +34,12 @@
 							<input type="text" name="nombre" value="" class="form-control" id="nombre">
 						</div>
 						<div>
+							<h5 for="apellido" class="text-center">Apellido</h5>
+						</div>
+						<div class="col-md-8 mx-auto">
+							<input type="text" name="apellido" value="" class="form-control" id="apellido">
+						</div>
+						<div>
 							<h5 for="cedula" class="text-center">Cédula</h5>
 						</div>
 						<div class="col-md-8 mx-auto">
@@ -90,29 +96,30 @@
 	</div>
 	<script type="text/javascript">
 	function registrar() {
-  const username = $("#username").val();
-  const password = $("#password").val();
-  const nombre = $("#nombre").val();
-  const cedula = $("#cedula").val();
-  const email = $("#email ").val();
-  const celular = $("#celular").val();
-  const telefono = $("#telefono").val();
-  const direccion = $("#direccion").val();
-  const data = {};
-  data.user = username;
-  data.password = password;
-  data.nombre = nombre;
-  data.cedula = cedula;
-  data.email = email;
-  data.celular = celular;
-  data.telefono = telefono;
-  data.tipo = tipo;
-  data.direccion = direccion;
+	  const username = $("#username").val();
+	  const password = $("#password").val();
+	  const nombre = $("#nombre").val();
+	  const apellido = $("#apellido").val();
+	  const cedula = $("#cedula").val();
+	  const carrera = $("#carrera").val();
+	  const email = $("#email ").val();
+	  const celular = $("#celular").val();
+	  const telefono = $("#telefono").val();
+	  const direccion = $("#direccion").val();
+	  const data = {};
+	  data.user = username;
+	  data.password = password;
+	  data.nombre = nombre;
+	  data.apellido = apellido;
+	  data.cedula = cedula;
+	  data.carrera = carrera;
+	  data.email = email;
+	  data.celular = celular;
+	  data.telefono = telefono;
+	  data.direccion = direccion;
 
 
   const data = {};
-  data.user = username;
-  data.password = password;
   $.ajax({
     url: "api/user",
     data: data,
