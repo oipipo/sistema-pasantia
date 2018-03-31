@@ -12,10 +12,7 @@
 	<script src="js/reglamento.js" chartset="utf-8"></script>
 	<script src="js/carta-postulacion.js" chartset="utf-8"></script>
 	<script src="js/inicio.js" chartset="utf-8"></script>
-	<!--
 	<script src="js/plan-trabajo.js" chartset="utf-8"></script>
-	<script src="js/constancia-inscripcion.js" chartset="utf-8"></script>
-    -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
 
 	<div class="container-fluid" style="background:#0D50AF;">
@@ -47,7 +44,7 @@
 				    }
 				  });
 			  </script>
-				<div type="button" id="generar-btn" class="btn btn-basic btn-lg btn-block mt-4 mb-2">
+				<div type="button" id="generar-btn" class="btn btn-success btn-lg btn-block mt-4 mb-2">
 						Generar pasantía
 				</div>
 				<div type="button" id="presentacion-btn" class="btn btn-primary btn-lg btn-block mt-4 mb-2" onclick="javascript:generar_lista_presentacion()">
@@ -56,11 +53,8 @@
 				<div type="button" id="postulacion-btn" class="btn btn-secondary btn-lg btn-block mt-3 mb-2" onclick="javascript:generar_lista_postulacion()">
 						Carta de postulacion
 				</div>
-				<div type="button" class="btn btn-info btn-lg btn-block mt-3 mb-2" onclick="javascript:()">
+				<div type="button" id="trabajo-btn" class="btn btn-info btn-lg btn-block mt-3 mb-2" onclick="javascript:()">
 						Plan de trabajo
-				</div>
-				<div type="button" class="btn btn-success btn-lg btn-block mt-3 mb-2" onclick="javascript:()">
-						Constancia de inscripción de Pasantía
 				</div>
 				<div type="button" id="reglamento-btn" class="btn btn-link btn-lg btn-block mt-3 mb-2">
 						Reglamento de pasantías 						
@@ -73,10 +67,16 @@
 			</div>
 			<div class="col-md-9">
 				<div id="inicio">
-					<h1 align="justify">Bienvenido al sistema de pasantías, este sistema sirve para generar tus cartas de postulacion, presentación, constancia de inscripcion de pasantía, y subir tu plan de trabajo, así como tambien, revisar e imprimir cada una de estas adicionalmente se le da la opcion para descargar </h1>
+					<h2 align="justify">En el Sistema de Pasantías podrás gestionar los datos y documentos necesarios para formalizar una pasantía, como lo son: <br>
+						*Carta de Presentación <br>
+						*Carta de Postulación <br>
+						*Plan de Trabajo <br>
+
+						Adicional a esto podrás descargar el Reglamento De Pasantias para conocer más sobre la gestión de ésta. 
+					</h2>
 				</div>
 				<div class="row" id="generar" style="display:none;">
-					<div class="col-md-6 mb-2 mt-2 ml-4" style="background:Gainsboro;border-color:black;border-style:solid">
+					<div class="col" style="background:Gainsboro;border-color:black;border-style:solid">
 						<div>
 							<h3 for="Ingrese datos" class="text-center">Ingrese datos de su pasantía</h3>
 						</div>
@@ -116,41 +116,43 @@
 						<div>
 							<h5 for="Fecha de inicio" class="text-center">Fecha de inicio</h5>
 						</div>
-						<div class="col-md-4 mb-2 mx-auto">
+						<div class="col-md-2 mb-2 mx-auto">
 							<input type="date" required id="init" value="">
 						</div>
 						<div>
 							<h5 for="Fecha de culminación" class="text-center">Fecha de culminación</h5>
 						</div>
-						<div class="col-md-4 mb-2 mx-auto">
+						<div class="col-md-2 mb-2 mx-auto">
 							<input type="date" required id="fin" value="">
 						</div>
 						<div>
 							<h5 for="Duracion" class="text-center">Duración</h5>
 						</div>
-						<div class="col-md-3 mb-2 mx-auto">
+						<div class="col-md-1 mb-2 mx-auto">
 							<input type="number" id="duracion" value="16" min="16" max="52">
 						</div>
-						<div class="col-md-3 mt-2 mb-2 mx-auto">
+						<div>
+							<h5 for="plan" class="text-center">Ingrese Plan de trabajo</h5>
+						</div>
+						<div class="col-md-2 mb-2 mx-auto">
+							<input type="file" id="plan">
+						</div>
+
+						<div class="col-md-1 mt-2 mb-2 mx-auto">
 							<button onClick="generar()" id="registrar-btn" class="btn btn-dark btn-lg">Registrar</button>
 						</div>
 					</div>
-<!--
-					<div class="col" id="presentacion">
-
-					</div>
-				-->
-					<div class="col" id="postulacion">
-
-					</div>
 				</div>
 				<div class="col" id="carta-presentacion" style="display:none">
-						<h2>Cartas de presentación disponibles</h2>
+					<h2>Cartas de presentación disponibles</h2>
 						  <ul class="list-group" id="preList">
 				</div>
 				<div class="col" id="carta-postulacion" style="display:none">
 					<h2>Cartas de postulación disponibles</h2>
 					<ul class="list-group" id="posList">
+				</div>
+				<div class="col" id="plan-trabajo" style="display:none">
+					<h2>Plan de trabajo disponibles</h2>
 				</div>
 				<embed src="/documents/reglamento.pdf" type="application/pdf" width="101%" height="85%" id="reglamento" style="display:none;"  ></embed>
 			</div>

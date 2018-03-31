@@ -78,16 +78,18 @@ function generar()
 
 	var doc0 = new jsPDF();
 	doc0.text(text0, 10, 10);
-	
+
 	var doc = new jsPDF();
 	doc.text(text2+text3, 10, 10);
-	logo.onload = function()
-	{
+
+	setTimeout(function(){
 		doc0.addImage(logo, 5, 5);
 		doc0.save('Carta_de_presentacion.pdf');
+	}, 2000);
+	setTimeout(function(){
 		doc.addImage(logo, 5, 5);
 		doc.save('Carta_de_postulacion.pdf');
-	}
+	}, 2000);
 
 /*
 	var pre = document.createElement("EMBED");

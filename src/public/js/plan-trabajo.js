@@ -1,0 +1,11 @@
+$(document).ready(function()
+{
+	$("#trabajo-btn").click(function(){
+    	$("#reglamento").hide();
+    	$("#inicio").hide();
+    	$("#carta-presentacion").hide();
+    	$("#carta-postulacion").hide();
+    	$("#plan-trabajo").show();
+    	$("#generar").hide();
+	});
+});
