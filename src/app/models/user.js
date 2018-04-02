@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = new mongoose.Schema({
 	user: String,
-	password: String,
+	password: {type: String, set:generateHash},
 	nombre: String,
 	apellido: String,
 	cedula: String,
@@ -13,14 +13,14 @@ const userSchema = new mongoose.Schema({
 	telefono: String,
 	direccion: String
 });
-userSchema.methods.generateHash = function (password)
+ function generateHash(password)
 {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
 userSchema.methods.validatePassword = function(password)
 {
-	return bcrypt.compareSync(password, this.local.password);
+	return bcrypt.compareSync(password, this.password);
 };
 
 module.exports = mongoose.model("User", userSchema);

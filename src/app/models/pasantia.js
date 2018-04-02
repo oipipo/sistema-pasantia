@@ -10,3 +10,5 @@ const pasantiaSchema = new mongoose.Schema({
 	fechaFin: Date,
 	duracion: Number
 });
+
+module.exports = mongoose.model("Pasantia", pasantiaSchema);

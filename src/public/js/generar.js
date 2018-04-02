@@ -9,6 +9,43 @@ $(document).ready(function()
     	$("#generar").show();
 	});
 });
+function guardar()
+{
+	const tipo = $("#tipo").val();
+	const institucion = $("#institucion").val();
+	const area = $("#area").val();
+	const titulo = $("#titulo").val();
+	const academico = $("#academico ").val();
+	const fechaInicio = $("#fechaInicio").val();
+	const fechaFin = $("#fechaFin").val();
+	const duracion = $("#duracion").val();
+	const data = {};
+
+	data.tipo = tipo;
+	data.institucion = institucion;
+	data.area = area;
+	data.titulo = titulo;
+	data.cedula = cedula;
+	data.academico = academico;
+	data.fechaInicio = fechaInicio;
+	data.fechaFin = fechaFin;
+	data.tipo = tipo;
+	data.duracion = duracion;
+
+	$.ajax(
+	{
+		url: "api/pasantia",
+		data: data,
+		method: "POST",
+		type: "POST",
+		success: function(data) {
+		  alert(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+		  //TODO ERROR NOTIFY
+		}
+	});
+}
 function generar() 
 {
 	var logo =new Image;
@@ -55,7 +92,7 @@ function generar()
 			 "____________________ cédula de identidad: ____________ \r"+
 			 "cursante de la carrera de "+"INGENIERO EN INFORMÁTICA con un indice\r"
 			 +"académico de -.-- para realizar la actividad de pasantías en esa importante\r"+
-			 "empresa durante el periodo comprendido entre el "+day+" de "+month+" de "+year+" al \r"
+			 "empresa durante el periodo comprendido entre el "+day+" de "+meses[parseInt(month)]+" de "+year+" al \r"
 			 +day1+" de "+month1+" de "+year1+
 			 "\rLa pasantía consiste en un conjunto de actividades de estudio y de trabajo\r"+
 			 "cuyo propósito es contribuir con la formación de un profesional integral y \r"+
@@ -78,18 +115,27 @@ function generar()
 
 	var doc0 = new jsPDF();
 	doc0.text(text0, 10, 10);
-
 	var doc = new jsPDF();
 	doc.text(text2+text3, 10, 10);
 
-	setTimeout(function(){
+	logo.onload = function()
+	{
 		doc0.addImage(logo, 5, 5);
+		doc.addImage(logo, 5, 5);
+	};
+	
+	
+	
+
+	/*setTimeout(function(){
+		
 		doc0.save('Carta_de_presentacion.pdf');
 	}, 2000);
 	setTimeout(function(){
-		doc.addImage(logo, 5, 5);
+		
 		doc.save('Carta_de_postulacion.pdf');
 	}, 2000);
+	*/
 
 /*
 	var pre = document.createElement("EMBED");
@@ -113,39 +159,5 @@ function generar()
 
 
 
-	/*
-	const cedula = $("#cedula").val();
-	const tipo = $("#tipo").val();
-	const institucion = $("#institucion").val();
-	const area = $("#area").val();
-	const titulo = $("#titulo").val();
-	const academico = $("#academico ").val();
-	const fechaInicio = $("#fechaInicio").val();
-	const fechaFin = $("#fechaFin").val();
-	const duracion = $("#duracion").val();
-	const data = {};
 
-	data.tipo = tipo;
-	data.institucion = institucion;
-	data.area = area;
-	data.titulo = titulo;
-	data.cedula = cedula;
-	data.academico = academico;
-	data.fechaInicio = fechaInicio;
-	data.fechaFin = fechaFin;
-	data.tipo = tipo;
-	data.duracion = duracion;
-
-$.ajax({
-url: "api/pasantia",
-data: data,
-method: "POST",
-type: "POST",
-success: function(data) {
-  alert("IT WORKS");
-},
-error: function(XMLHttpRequest, textStatus, errorThrown) {
-  //TODO ERROR NOTIFY
-}
-});*/
 }

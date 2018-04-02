@@ -10,8 +10,8 @@ async function update(req, res) {
   res.send({});
 }
 
-async function profile(req, res) {
-  const pasantia = await Pasantia.findOne({ _id: req.params.id });
+async function get(req, res) {
+  const pasantia = await Pasantia.findOne({ cedula: req.params.cedula });
   res.send(pasantia);
 }
 

@@ -16,7 +16,7 @@ async function profile(req, res) {
 }
 
 async function me(req, res) {
-  //const user = await User.findOne({ _id: req.user._id });
+  console.log("ME!",req.user);
   res.send(req.user);
 }
 

@@ -1,30 +1,38 @@
 const UserController = require("./controllers/user");
 const PasantiaController = require("./controllers/pasantia");
+const express = require("express");
+const auth = require("./auth");
+
+const secureRouter = express.Router();
+secureRouter.use(auth.jwt());
 
 module.exports = (app, passport) => {
   app.get("/", (req, res) => {
     res.render("index", {
-      menssage: req.flash("initMessage")
+     
     });
   });
 
   app.post(
     "/",
-    passport.authenticate("local-login", {
-      successRedirect: "/sistema",
-      failureRedirect: "/",
-      failureFlash: true
-    })
+    auth.identifyAuthProvider,
+    (req, res) => {
+      if (req.user) {
+        var token = auth.utils.generateAuthToken(req.user);
+        res.json({user:req.user, token:token});
+      }
+    }
   );
 
-  app.get("/sistema", (req, res) => {
+  secureRouter.get("/sistema", (req, res) => {
     res.render("sistema", {
-      menssage: req.flash("sistemaMessage")
+     user: req.user
     });
   });
+
   app.get("/registro", (req, res) => {
     res.render("registro", {
-      menssage: req.flash("registroMessage")
+      
     });
   });
   //logout
@@ -35,16 +43,17 @@ module.exports = (app, passport) => {
 
   // CRUD de Usuarios
   app.post("/api/user", UserController.create);
-  app.get("/api/user/:id", UserController.profile);
-  app.get("/api/user/me", UserController.me);
-  app.put("/api/user", UserController.update);
+  secureRouter.get("/api/user/me", UserController.me);
+  secureRouter.get("/api/user/:id", UserController.profile);
+  secureRouter.put("/api/user", UserController.update);
   app.delete("/api/user", UserController.destroy);
-  //crud de pasantias
-  app.post("/api/pasantia", PasantiaController.create);
-  app.get("/api/pasantia/:id", PasantiaController.profile);
-  app.get("/api/pasantia/me", PasantiaController.me);
-  app.put("/api/pasantia", PasantiaController.update);
-  app.delete("/api/pasantia", PasantiaController.destroy);
+  //CRUD DE PASANTIAS
+  secureRouter.post("/api/pasantia", PasantiaController.create);
+  secureRouter.get("/api/pasantia/:id", PasantiaController.profile);
+  secureRouter.get("/api/pasantia/me", PasantiaController.me);
+  secureRouter.put("/api/pasantia", PasantiaController.update);
+  secureRouter.delete("/api/pasantia", PasantiaController.destroy);
+  app.use(secureRouter);
 };
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

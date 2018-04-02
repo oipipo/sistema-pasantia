@@ -9,7 +9,7 @@ const morgan = require('morgan')//definir los metodos http para mostrar en conso
 const cookieParser = require('cookie-parser')//administrar cookies
 const bodyParser = require('body-parser')//info del navegador al servidor
 const session = require('express-session')//para manejar sessiones
-
+const auth = require("./app/auth");
 const { url } = require('./config/database.js')//url para conexion con base de datos
 
 mongoose.connect(url);//conectar mongoose con el link de la base de datos
@@ -25,19 +25,14 @@ app.use(morgan('dev'));//para ver mensajes en consola
 app.use(cookieParser());//para poder convertir cookies e interpretarlas
 app.use(bodyParser.urlencoded({extended: false}));//la informacion de los formularios, para interpretarla a traves de url
 //requerido por passport
-app.use(session({// para las sesiones
-	secret: 'pasantia',
-	resave: false,
-	saveUninitialized: false
-}));
-app.use(passport.initialize());//para autenticacion
-app.use(passport.session());//para unirlo a las sessiones
-app.use(flash());//para pasar mensajes entre distintos htmls
+app.use(express.static(path.join(__dirname,'public')));//donde estaran los archivos estaticos
+app.use(auth.init());
+
 //routes
 require('./app/routes.js')(app, passport);//definir donde estan las rutas
 
 //static files
-app.use(express.static(path.join(__dirname,'public')));//donde estaran los archivos estaticos
+
 
 app.listen(app.get('port'), () =>
 {
