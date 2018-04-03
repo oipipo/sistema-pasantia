@@ -39,41 +39,29 @@ function guardar()
 		method: "POST",
 		type: "POST",
 		success: function(data) {
-		  alert(data);
+			JSON.stringify(data)
+			alert("Datos guardados");
+			document.getElementById("generarform").reset();
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 		  //TODO ERROR NOTIFY
 		}
 	});
 }
-function generar() 
+function generar_presentacion(empresa)
 {
-	var logo =new Image;
-	logo.src="/images/uneg carta.png"
-	var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-	var f=new Date();
-
-	var date=$('#init').val().split('-');
-	var day=date[2];
-	var month=date[1];
-	var year=date[0];
-	var date1=$('#fin').val().split('-');
-	var day1=date1[2];
-	var month1=date1[1];
-	var year1=date1[0];
-	
-	var text0="\t\tUNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA \r"+
+	var texto="\t\tUNIVERSIDAD NACIONAL EXPERIMENTAL DE GUAYANA \r"+
 	 	   	 "\t\t\t\t\tVICERRECTORADO ACADÉMICO \r"+
 	 	   	 "\t\t\t\tCOORDINACIÓN GENERAL DE PREGRADO \r"+ 
 	 	   	 "\t\t\t\t\tCOORDINACIÓN DE PASANTIAS \r\r\r"+ 
 	 	   	 "Puerto Ordaz,"+f.getDate()+" de "+meses[f.getMonth()]+" de "+f.getFullYear()+" \r"+ 
 	 	   	 "Carta de Presentación \r"+
 			 "Señores: \r"+
-			 ""+document.getElementById("empresa").value+
+			 empresa+"\r"+
 			 "Presente\r"+
-			 "Sirva la presente para informarles que el estudiante "+"Apellido \r"+
-			 "Nombre cédula de identidad: "+"--------"+", cursante de la carrera:\r"+
-			 "INGENIERO EN INFORMÁTICA"+", con un Índice académico de "+"-.--"+", esta apto\r"+
+			 "Sirva la presente para informarles que el estudiante "+datos.apellido+"\r"+
+			 +datos.nombre+" cédula de identidad: "+datos.cedula+", cursante de la carrera:\r"+
+			 datos.carrera+", con un Índice académico de "+datos.indice+", esta apto\r"+
 			 "académicamente para realizar la Pasantía a nivel Profesional, con una\r"+
 			 "duración mínima de dieciseis (16) semanas.\r"+
 			 "ESTA COMUNICACIÓN NO POSTULA AL PORTADOR DE LA PRESENTE\r"+
@@ -84,16 +72,34 @@ function generar()
 			 "Prof: Lennys Castro\r"+
 			 "Responsable de Pasantías\r"+
 			 "Sede Puerto Ordaz\r";
+	var doc = new jsPDF();
+	doc.text(texto, 10, 10);
+	logo.onload = function()
+	{
+		doc.addImage(logo, 5, 5);
+	};
+	return doc;
+}
+function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, carrera, indice)
+{
+	var dateInicio=dateI.split('-');
+	var dayI=dateInicio[2];
+	var monthI=dateInicio[1];
+	var yearI=dateInicio[0];
+	var dateFin=dateF.split('-');
+	var dayF=dateFin[2];
+	var monthF=dateFin[1];
+	var yearF=dateFin[0];
 	var text2="\t\t\t\t\t\t\t\tPuerto Ordaz,"+f.getDate()+" de "+meses[f.getMonth()]+" de "+f.getFullYear()+" \r"+ 
 	 	   	 "\t\t\t\t\tCarta de Postulación \r\r\r\r"+
-			 ""+document.getElementById("empresa").value+
-			 "\rCIUDAD GUAYANA\r"+
+			 empresa+"\r"+
+			 "CIUDAD GUAYANA\r"+
 			 "Por medio de la presente se postula oficialmente, al estudiante\r"+
-			 "____________________ cédula de identidad: ____________ \r"+
+			 apellido+" "+nombre +" cédula de identidad: "+cedula+"\r"+
 			 "cursante de la carrera de "+"INGENIERO EN INFORMÁTICA con un indice\r"
 			 +"académico de -.-- para realizar la actividad de pasantías en esa importante\r"+
-			 "empresa durante el periodo comprendido entre el "+day+" de "+meses[parseInt(month)]+" de "+year+" al \r"
-			 +day1+" de "+month1+" de "+year1+
+			 "empresa durante el periodo comprendido entre el "+dayI+" de "+meses[parseInt(monthI)]+" de "+yearI+" al \r"
+			 +dayF+" de "+monthF+" de "+yearF+
 			 "\rLa pasantía consiste en un conjunto de actividades de estudio y de trabajo\r"+
 			 "cuyo propósito es contribuir con la formación de un profesional integral y \r"+
 			 "participativo en el desarrollo socioeconómico de la Región Guayana y del país.\r"+
@@ -112,31 +118,24 @@ function generar()
 			 "\t\t\t\t\t\tAtentamente,\r\r\r\r"+
 			 "_________________                               __________________________\r"+
 			 "Prof: Lennys Castro                                 Director de FUNDEI Guayana\r";
-
-	var doc0 = new jsPDF();
-	doc0.text(text0, 10, 10);
 	var doc = new jsPDF();
 	doc.text(text2+text3, 10, 10);
 
 	logo.onload = function()
 	{
-		doc0.addImage(logo, 5, 5);
 		doc.addImage(logo, 5, 5);
 	};
-	
-	
-	
+	return doc;
+}
+function generar() 
+{
 
-	/*setTimeout(function(){
-		
-		doc0.save('Carta_de_presentacion.pdf');
-	}, 2000);
-	setTimeout(function(){
-		
-		doc.save('Carta_de_postulacion.pdf');
-	}, 2000);
-	*/
 
+
+
+
+}
+//Para mostrar de forma embebida 
 /*
 	var pre = document.createElement("EMBED");
     pre.setAttribute("src", "/documents/Carta_de_presentacion.pdf");
@@ -156,8 +155,3 @@ function generar()
 		document.getElementById("postulacion").appendChild(pos);
 	}, 5000);
 */
-
-
-
-
-}

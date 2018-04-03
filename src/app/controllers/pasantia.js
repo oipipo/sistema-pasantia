@@ -23,4 +23,4 @@ async function destroy(req, res) {
   res.send({});
 }
 
-module.exports = { create, update, profile, destroy, me };
+module.exports = { create, update, get, destroy, me };

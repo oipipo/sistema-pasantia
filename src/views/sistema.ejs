@@ -40,8 +40,15 @@
 				    url: "api/user/me",
 				    method: "GET",
 				    success: function(data) {
-				      document.getElementById("user-name").innerHTML=("Bienvenido al sistema: <b>"+data.nombre+"</b>");
-				      cedula=data.cedula;
+					    datos.nombre=data.nombre;
+					    datos.apellido=data.apellido;
+					    datos.cedula=data.cedula;
+					    datos.carrera=data.carrera;
+					    datos.email=data.email;
+					    datos.celular=data.celular;
+					    datos.telefono=data.telefono;
+					    datos.indice="8.05";
+				      	document.getElementById("user-name").innerHTML=("Bienvenido al sistema: <b>"+datos.nombre+"</b>");
 				    },
 				    error: function(XMLHttpRequest, textStatus, errorThrown) {
 				     console.log("Mota", XMLHttpRequest, textStatus, errorThrown);
@@ -81,70 +88,72 @@
 				</div>
 				<div class="row" id="generar" style="display:none;">
 					<div class="col" style="background:Gainsboro;border-color:black;border-style:solid">
-						<div>
-							<h3 for="Ingrese datos" class="text-center">Ingrese datos de su pasantía</h3>
-						</div>
-						<div>
-							<h5 for="Tipo de pasantía" class="text-center">Tipo de pasantía</h5>
-						</div>
-						<div class="col-md-2 mb-2 mx-auto">
-							<select id="tipo">
-								  <option value="profesional">Profesional</option>
-								  <option value="tesista">Tesista</option>
-							</select>
-						</div>
-						<div>
-							<h5 for="empresa" class="text-center">Empresa/Institución</h5>
-						</div>
-						<div class="col-md-6 mb-2 mx-auto">
-							<input type="text" id="empresa" required value="" class="form-control">
-						</div>
-						<div>
-							<h5 for="area" class="text-center">Area a ejecutar</h5>
-						</div>
-						<div class="col-md-6 mb-2 mx-auto">
-							<input type="text" id="area" value="" class="form-control">
-						</div>
-						<div>
-							<h5 for="titulo" class="text-center">Titulo de pasantia</h5>
-						</div>
-						<div class="col-md-6 mb-2 mx-auto">
-							<input type="text" id="titulo" value="" class="form-control">
-						</div>
-						<div>
-							<h5 for="tutor academico" class="text-center">Tutor academico</h5>
-						</div>
-						<div class="col-md-6 mb-2 mx-auto">
-							<input type="text" id="academico" value="" class="form-control">
-						</div>
-						<div>
-							<h5 for="Fecha de inicio" class="text-center">Fecha de inicio</h5>
-						</div>
-						<div class="col-md-2 mb-2 mx-auto">
-							<input type="date" required id="init" value="">
-						</div>
-						<div>
-							<h5 for="Fecha de culminación" class="text-center">Fecha de culminación</h5>
-						</div>
-						<div class="col-md-2 mb-2 mx-auto">
-							<input type="date" required id="fin" value="">
-						</div>
-						<div>
-							<h5 for="Duracion" class="text-center">Duración</h5>
-						</div>
-						<div class="col-md-1 mb-2 mx-auto">
-							<input type="number" id="duracion" value="16" min="16" max="52">
-						</div>
-						<div>
-							<h5 for="plan" class="text-center">Ingrese Plan de trabajo</h5>
-						</div>
-						<div class="col-md-2 mb-2 mx-auto">
-							<input type="file" id="plan">
-						</div>
+						<form id="generarform">
+							<div>
+								<h3 for="Ingrese datos" class="text-center">Ingrese datos de su pasantía</h3>
+							</div>
+							<div>
+								<h5 for="Tipo de pasantía" class="text-center">Tipo de pasantía</h5>
+							</div>
+							<div class="col-md-2 mb-2 mx-auto">
+								<select id="tipo">
+									  <option value="profesional">Profesional</option>
+									  <option value="tesista">Tesista</option>
+								</select>
+							</div>
+							<div>
+								<h5 for="empresa" class="text-center">Empresa/Institución</h5>
+							</div>
+							<div class="col-md-6 mb-2 mx-auto">
+								<input type="text" id="empresa" required value="" class="form-control">
+							</div>
+							<div>
+								<h5 for="area" class="text-center">Area a ejecutar</h5>
+							</div>
+							<div class="col-md-6 mb-2 mx-auto">
+								<input type="text" id="area" value="" class="form-control">
+							</div>
+							<div>
+								<h5 for="titulo" class="text-center">Titulo de pasantia</h5>
+							</div>
+							<div class="col-md-6 mb-2 mx-auto">
+								<input type="text" id="titulo" value="" class="form-control">
+							</div>
+							<div>
+								<h5 for="tutor academico" class="text-center">Tutor academico</h5>
+							</div>
+							<div class="col-md-6 mb-2 mx-auto">
+								<input type="text" id="academico" value="" class="form-control">
+							</div>
+							<div>
+								<h5 for="Fecha de inicio" class="text-center">Fecha de inicio</h5>
+							</div>
+							<div class="col-md-2 mb-2 mx-auto">
+								<input type="date" required id="init" value="">
+							</div>
+							<div>
+								<h5 for="Fecha de culminación" class="text-center">Fecha de culminación</h5>
+							</div>
+							<div class="col-md-2 mb-2 mx-auto">
+								<input type="date" required id="fin" value="">
+							</div>
+							<div>
+								<h5 for="Duracion" class="text-center">Duración</h5>
+							</div>
+							<div class="col-md-1 mb-2 mx-auto">
+								<input type="number" id="duracion" value="16" min="16" max="52">
+							</div>
+							<div>
+								<h5 for="plan" class="text-center">Ingrese Plan de trabajo</h5>
+							</div>
+							<div class="col-md-2 mb-2 mx-auto">
+								<input type="file" id="plan">
+							</div>
 
-						<div class="col-md-1 mt-2 mb-2 mx-auto">
-							<button onClick="guardar()" id="registrar-btn" class="btn btn-dark btn-lg">Registrar</button>
-						</div>
+							<div class="col-md-1 mt-2 mb-2 mx-auto">
+								<button onClick="guardar()" id="registrar-btn" class="btn btn-dark btn-lg">Registrar</button>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div class="col" id="carta-presentacion" style="display:none">

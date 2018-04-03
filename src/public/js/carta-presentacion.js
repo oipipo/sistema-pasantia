@@ -1,3 +1,4 @@
+
 $(document).ready(function()
 {
 	$("#presentacion-btn").click(function(){
@@ -11,16 +12,16 @@ $(document).ready(function()
 });
 function generar_lista_presentacion()
 {
-	
-	if(pre=="FALSE")
-	{
+	var  presentacion_doc = generar_presentacion("Unexpo");
 		var node = document.createElement("LI");
 		var item = document.createElement("a");
-	    var textnode = document.createTextNode("pre");
-	    item.setAttribute('href',"http://google.com")
+	    var textnode = document.createTextNode("prueba");
+	    item.setAttribute('onClick',presentacion_doc.save('carta.pdf'));
 	    item.appendChild(textnode);
 	    node.appendChild(item);
 	    document.getElementById("preList").appendChild(node);
-	    pre="TRUE";
-	}
+}
+function descargar(documento)
+{
+	documento.save('carta.pdf');
 }
