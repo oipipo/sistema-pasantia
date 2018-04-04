@@ -59,7 +59,7 @@ function generar_presentacion(empresa)
 			 empresa+"\r"+
 			 "Presente\r"+
 			 "Sirva la presente para informarles que el estudiante "+datos.apellido+"\r"+
-			 +datos.nombre+" cédula de identidad: "+datos.cedula+", cursante de la carrera:\r"+
+			 ""+datos.nombre+" cédula de identidad: "+datos.cedula+", cursante de la carrera:\r"+
 			 datos.carrera+", con un Índice académico de "+datos.indice+", esta apto\r"+
 			 "académicamente para realizar la Pasantía a nivel Profesional, con una\r"+
 			 "duración mínima de dieciseis (16) semanas.\r"+
@@ -76,34 +76,26 @@ function generar_presentacion(empresa)
 	doc.addImage(logo, 5, 5);
 	return doc;
 }
-function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, carrera, indice)
+function generar_postulacion(dateI, dateF, empresa)
 {
-	if(dateI===undefined)
-		var dateInicio="01-04-2018"
-	else
-		var dateInicio=dateI.substr(10).split('-');
-	if(dateF===undefined)
-		var dateInicio="01-08-2018"
-	else
-		var dateInicio=dateI.substr(10).split('-');
-
+	var dateInicio=dateI.slice(0,10).split('-');
+	var dateFin=dateF.slice(0,10).split('-');
 	var dayI=dateInicio[2];
 	var monthI=dateInicio[1];
 	var yearI=dateInicio[0];
-	var dateFin=dateF.substr(10).split('-');
 	var dayF=dateFin[2];
 	var monthF=dateFin[1];
 	var yearF=dateFin[0];
 	var text2="\t\t\t\t\t\t\t\tPuerto Ordaz,"+f.getDate()+" de "+meses[f.getMonth()]+" de "+f.getFullYear()+" \r"+ 
 	 	   	 "\t\t\t\t\tCarta de Postulación \r\r\r\r"+
-			 empresa+"\r"+
+			 ""+empresa+"\r"+
 			 "CIUDAD GUAYANA\r"+
 			 "Por medio de la presente se postula oficialmente, al estudiante\r"+
-			 apellido+" "+nombre +" cédula de identidad: "+cedula+"\r"+
+			 ""+datos.apellido+" "+datos.nombre +" cédula de identidad: "+datos.cedula+"\r"+
 			 "cursante de la carrera de "+"INGENIERO EN INFORMÁTICA con un indice\r"
-			 +"académico de -.-- para realizar la actividad de pasantías en esa importante\r"+
-			 "empresa durante el periodo comprendido entre el "+dayI+" de "+meses[parseInt(monthI)]+" de "+yearI+" al \r"
-			 +dayF+" de "+monthF+" de "+yearF+
+			 +"académico de "+datos.indice+" para realizar la actividad de pasantías en esa importante\r"+
+			 "empresa durante el periodo comprendido entre el "+dayI+" de "+meses[parseInt(monthI)]+" de "+yearI+" al \r"+
+			 ""+dayF+" de "+meses[parseInt(monthF)]+" de "+yearF+
 			 "\rLa pasantía consiste en un conjunto de actividades de estudio y de trabajo\r"+
 			 "cuyo propósito es contribuir con la formación de un profesional integral y \r"+
 			 "participativo en el desarrollo socioeconómico de la Región Guayana y del país.\r"+
@@ -124,11 +116,7 @@ function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, ca
 			 "Prof: Lennys Castro                                 Director de FUNDEI Guayana\r";
 	var doc = new jsPDF();
 	doc.text(text2+text3, 10, 10);
-
-	logo.onload = function()
-	{
-		doc.addImage(logo, 5, 5);
-	};
+	doc.addImage(logo, 5, 5);
 	return doc;
 }
 function descargar(tipo)
@@ -139,7 +127,7 @@ function descargar(tipo)
 		presentacion_doc.save('carta de presentacion.pdf')
 	}else
 	{
-		var  postulacion_doc = generar_postulacion(pasantia.fechaInicio,pasantia.fechaFin,pasantia.institucion, datos.apellido, datos.nombre, datos.cedula,datos.carrera,datos.indice);
+		var  postulacion_doc = generar_postulacion(pasantia.fechaInicio,pasantia.fechaFin,pasantia.institucion);
 		postulacion_doc.save('carta de postulacion.pdf')
 	}
 }
