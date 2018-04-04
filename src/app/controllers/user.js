@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 async function create(req, res) {
-  const user = new User(req.body); // {user:"usuario", password:"1234"}
+  const user = new User(req.body);
   await user.save();
   res.send(user);
 }
