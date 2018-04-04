@@ -9,7 +9,7 @@ $(document).ready(function()
     	$("#generar").hide();  	
 	  $.ajax(
 		{
-			url: "api/pasantia/:"+datos.cedula,
+			url: "api/pasantia/"+datos.cedula,
 			method: "GET",
 			success: function(data) 
 			{
@@ -33,12 +33,12 @@ function generar_lista_postulacion()
 {
 	if(pos=="FALSE")
 	{
-		var node = document.createElement("button");
-	    var textnode = document.createTextNode("Descargar");
-	    node.type="button";
-	    node.setAttribute('onClick',"descargar('pos')");
-	    node.appendChild(textnode);
-	    document.getElementById("car-pos").appendChild(node);
+		var node2 = document.createElement("button");
+	    var textnode2 = document.createTextNode("Descargar");
+	    node2.type="button";
+	    node2.setAttribute('onClick',"descargar('pos')");
+	    node2.appendChild(textnode2);
+	    document.getElementById("car-pos").appendChild(node2);
 	    pos="TRUE";
 	}
 }

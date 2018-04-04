@@ -156,7 +156,6 @@
 	    url: "api/user/me",
 	    method: "GET",
 	    success: function(data) {
-	    	setTimeout(function(){
 		    datos.nombre=data.nombre;
 		    datos.apellido=data.apellido;
 		    datos.cedula=data.cedula;
@@ -166,7 +165,6 @@
 		    datos.telefono=data.telefono;
 		    datos.indice="8.05";
 	      	document.getElementById("user-name").innerHTML=("Bienvenido al sistema: <b>"+datos.nombre+"</b>");
-	      	}, 1000);
 	    },
 	    error: function(XMLHttpRequest, textStatus, errorThrown) {
 	     console.log("Error", XMLHttpRequest, textStatus, errorThrown);

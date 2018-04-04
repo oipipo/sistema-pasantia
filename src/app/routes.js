@@ -49,7 +49,7 @@ module.exports = (app, passport) => {
   app.delete("/api/user", UserController.destroy);
   //CRUD DE PASANTIAS
   secureRouter.post("/api/pasantia", PasantiaController.create);
-  secureRouter.get("/api/pasantia/:id", PasantiaController.get);
+  secureRouter.get("/api/pasantia/cedula", PasantiaController.get);
   secureRouter.get("/api/pasantia/me", PasantiaController.me);
   secureRouter.put("/api/pasantia", PasantiaController.update);
   secureRouter.delete("/api/pasantia", PasantiaController.destroy);

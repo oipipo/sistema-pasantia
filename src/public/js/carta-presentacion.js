@@ -11,7 +11,7 @@ $(document).ready(function()
     	$("#generar").hide();
 		$.ajax(
 		{
-			url: "api/pasantia/:"+datos.cedula,
+			url: "api/pasantia/"+datos.cedula,
 			method: "GET",
 			success: function(data) 
 			{

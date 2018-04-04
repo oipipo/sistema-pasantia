@@ -78,8 +78,15 @@ function generar_presentacion(empresa)
 }
 function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, carrera, indice)
 {
+	if(dateI===undefined)
+		var dateInicio="01-04-2018"
+	else
+		var dateInicio=dateI.substr(10).split('-');
+	if(dateF===undefined)
+		var dateInicio="01-08-2018"
+	else
+		var dateInicio=dateI.substr(10).split('-');
 
-	var dateInicio=dateI.substr(10).split('-');
 	var dayI=dateInicio[2];
 	var monthI=dateInicio[1];
 	var yearI=dateInicio[0];
@@ -126,7 +133,7 @@ function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, ca
 }
 function descargar(tipo)
 {
-	if('pre')
+	if(tipo=='pre')
 	{
 		var  presentacion_doc = generar_presentacion(pasantia.institucion);
 		presentacion_doc.save('carta de presentacion.pdf')
