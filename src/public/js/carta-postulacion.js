@@ -6,18 +6,39 @@ $(document).ready(function()
     	$("#carta-presentacion").hide();
     	$("#carta-postulacion").show();
     	$("#plan-trabajo").hide();
-    	$("#generar").hide();
+    	$("#generar").hide();  	
+	  $.ajax(
+		{
+			url: "api/pasantia/:"+datos.cedula,
+			method: "GET",
+			success: function(data) 
+			{
+			    pasantia.cedula=datos.cedula;
+			    pasantia.tipo=data.tipo;
+			    pasantia.institucion=data.institucion;
+			    pasantia.area = data.area;
+			    pasantia.titulo = data.titulo;
+				pasantia.academico = data.academico;
+				pasantia.fechaInicio = data.fechaInicio;
+				pasantia.fechaFin = data.fechaFin;
+				pasantia.duracion = data.duracion
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+			 console.log("Error", XMLHttpRequest, textStatus, errorThrown);
+			}
+		});
 	});
 });
 function generar_lista_postulacion()
 {
-	
 	if(pos=="FALSE")
 	{
-		var node = document.createElement("LI");
-	    var textnode = document.createTextNode("pos");
+		var node = document.createElement("button");
+	    var textnode = document.createTextNode("Descargar");
+	    node.type="button";
+	    node.setAttribute('onClick',"descargar('pos')");
 	    node.appendChild(textnode);
-	    document.getElementById("posList").appendChild(node);
+	    document.getElementById("car-pos").appendChild(node);
 	    pos="TRUE";
 	}
 }

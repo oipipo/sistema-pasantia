@@ -1,27 +1,49 @@
 
 $(document).ready(function()
 {
-	$("#presentacion-btn").click(function(){
+	$("#presentacion-btn").click(function()
+	{
     	$("#reglamento").hide();
     	$("#inicio").hide();
     	$("#carta-presentacion").show();
     	$("#carta-postulacion").hide();
     	$("#plan-trabajo").hide();
     	$("#generar").hide();
+		$.ajax(
+		{
+			url: "api/pasantia/:"+datos.cedula,
+			method: "GET",
+			success: function(data) 
+			{
+			    pasantia.cedula=datos.cedula;
+			    pasantia.tipo=data.tipo;
+			    pasantia.institucion=data.institucion;
+			    pasantia.area = data.area;
+			    pasantia.titulo = data.titulo;
+				pasantia.academico = data.academico;
+				pasantia.fechaInicio = data.fechaInicio;
+				pasantia.fechaFin = data.fechaFin;
+				pasantia.duracion = data.duracion
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+			 console.log("Error", XMLHttpRequest, textStatus, errorThrown);
+			}
+		});
 	});
 });
+
 function generar_lista_presentacion()
 {
-	var  presentacion_doc = generar_presentacion("Unexpo");
-		var node = document.createElement("LI");
-		var item = document.createElement("a");
-	    var textnode = document.createTextNode("prueba");
-	    item.setAttribute('onClick',presentacion_doc.save('carta.pdf'));
-	    item.appendChild(textnode);
-	    node.appendChild(item);
-	    document.getElementById("preList").appendChild(node);
+	if(pre=="FALSE")
+	{
+		var node = document.createElement("button");
+	    var textnode = document.createTextNode("Descargar");
+	    node.type="button";
+	    node.setAttribute('onClick',"descargar('pre')");
+	    node.appendChild(textnode);
+	    document.getElementById("car-pre").appendChild(node);
+	    pre="TRUE";
+	}
+
 }
-function descargar(documento)
-{
-	documento.save('carta.pdf');
-}
+

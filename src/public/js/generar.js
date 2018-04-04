@@ -12,12 +12,12 @@ $(document).ready(function()
 function guardar()
 {
 	const tipo = $("#tipo").val();
-	const institucion = $("#institucion").val();
+	const institucion = $("#empresa").val();
 	const area = $("#area").val();
 	const titulo = $("#titulo").val();
 	const academico = $("#academico ").val();
-	const fechaInicio = $("#fechaInicio").val();
-	const fechaFin = $("#fechaFin").val();
+	const fechaInicio = $("#init").val();
+	const fechaFin = $("#fin").val();
 	const duracion = $("#duracion").val();
 	const data = {};
 
@@ -25,13 +25,12 @@ function guardar()
 	data.institucion = institucion;
 	data.area = area;
 	data.titulo = titulo;
-	data.cedula = cedula;
+	data.cedula = datos.cedula;
 	data.academico = academico;
 	data.fechaInicio = fechaInicio;
 	data.fechaFin = fechaFin;
 	data.tipo = tipo;
 	data.duracion = duracion;
-
 	$.ajax(
 	{
 		url: "api/pasantia",
@@ -74,19 +73,17 @@ function generar_presentacion(empresa)
 			 "Sede Puerto Ordaz\r";
 	var doc = new jsPDF();
 	doc.text(texto, 10, 10);
-	logo.onload = function()
-	{
-		doc.addImage(logo, 5, 5);
-	};
+	doc.addImage(logo, 5, 5);
 	return doc;
 }
 function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, carrera, indice)
 {
-	var dateInicio=dateI.split('-');
+
+	var dateInicio=dateI.substr(10).split('-');
 	var dayI=dateInicio[2];
 	var monthI=dateInicio[1];
 	var yearI=dateInicio[0];
-	var dateFin=dateF.split('-');
+	var dateFin=dateF.substr(10).split('-');
 	var dayF=dateFin[2];
 	var monthF=dateFin[1];
 	var yearF=dateFin[0];
@@ -127,13 +124,17 @@ function generar_postulacion(dateI, dateF, empresa, apellido, nombre, cedula, ca
 	};
 	return doc;
 }
-function generar() 
+function descargar(tipo)
 {
-
-
-
-
-
+	if('pre')
+	{
+		var  presentacion_doc = generar_presentacion(pasantia.institucion);
+		presentacion_doc.save('carta de presentacion.pdf')
+	}else
+	{
+		var  postulacion_doc = generar_postulacion(pasantia.fechaInicio,pasantia.fechaFin,pasantia.institucion, datos.apellido, datos.nombre, datos.cedula,datos.carrera,datos.indice);
+		postulacion_doc.save('carta de postulacion.pdf')
+	}
 }
 //Para mostrar de forma embebida 
 /*

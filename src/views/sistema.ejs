@@ -35,26 +35,6 @@
 				<div style="text-center">
 					<h5 id="user-name"></h5>
 				</div>
-				<script>
-				  $.ajax({
-				    url: "api/user/me",
-				    method: "GET",
-				    success: function(data) {
-					    datos.nombre=data.nombre;
-					    datos.apellido=data.apellido;
-					    datos.cedula=data.cedula;
-					    datos.carrera=data.carrera;
-					    datos.email=data.email;
-					    datos.celular=data.celular;
-					    datos.telefono=data.telefono;
-					    datos.indice="8.05";
-				      	document.getElementById("user-name").innerHTML=("Bienvenido al sistema: <b>"+datos.nombre+"</b>");
-				    },
-				    error: function(XMLHttpRequest, textStatus, errorThrown) {
-				     console.log("Mota", XMLHttpRequest, textStatus, errorThrown);
-				    }
-				  });
-			  	</script>
 				<div type="button" id="generar-btn" class="btn btn-success btn-lg btn-block mt-4 mb-2">
 						Generar pasantía
 				</div>
@@ -157,12 +137,12 @@
 					</div>
 				</div>
 				<div class="col" id="carta-presentacion" style="display:none">
-					<h2>Cartas de presentación disponibles</h2>
-						  <ul class="list-group" id="preList">
+					<h2>Cartas de presentación</h2>
+					<div id="car-pre"></div>
 				</div>
 				<div class="col" id="carta-postulacion" style="display:none">
 					<h2>Cartas de postulación disponibles</h2>
-					<ul class="list-group" id="posList">
+					<div id="car-pos"></div>
 				</div>
 				<div class="col" id="plan-trabajo" style="display:none">
 					<h2>Plan de trabajo disponibles</h2>
@@ -171,6 +151,27 @@
 			</div>
 		</div>
 	</div>
-
+	<script>
+	  $.ajax({
+	    url: "api/user/me",
+	    method: "GET",
+	    success: function(data) {
+	    	setTimeout(function(){
+		    datos.nombre=data.nombre;
+		    datos.apellido=data.apellido;
+		    datos.cedula=data.cedula;
+		    datos.carrera=data.carrera;
+		    datos.email=data.email;
+		    datos.celular=data.celular;
+		    datos.telefono=data.telefono;
+		    datos.indice="8.05";
+	      	document.getElementById("user-name").innerHTML=("Bienvenido al sistema: <b>"+datos.nombre+"</b>");
+	      	}, 1000);
+	    },
+	    error: function(XMLHttpRequest, textStatus, errorThrown) {
+	     console.log("Error", XMLHttpRequest, textStatus, errorThrown);
+	    }
+	  });
+  	</script>
 </body>
 </html>
